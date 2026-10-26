@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f5f0e8">
+  <meta name="description" content="Wayvo — a considered carpooling frontend prototype.">
+  <title>Wayvo — good roads are better shared</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="#home" data-view="home" aria-label="Wayvo home">
+        <span class="brand-mark">WV</span>
+        <span class="brand-copy"><strong>Wayvo</strong><small>CARPOOLING, CONSIDERED</small></span>
+      </a>
+      <nav class="main-nav" aria-label="Main navigation">
+        <button class="nav-link is-active" data-view="home">INDEX</button>
+        <button class="nav-link" data-view="find">FIND A RIDE</button>
+        <button class="nav-link" data-view="offer">OFFER A RIDE</button>
+        <button class="nav-link" data-view="safety">SAFETY</button>
+      </nav>
+      <div class="topbar-actions">
+        <button class="user-chip hidden" id="userChip" data-view="dashboard"><span class="avatar">R</span><span id="userChipName">Rider</span></button>
+        <button class="text-link hidden" id="logoutButton" type="button">LOG OUT ↗</button>
+        <button class="button button-yellow button-small" data-view="auth">GET STARTED <span aria-hidden="true">↗</span></button>
+        <button class="mobile-menu" id="mobileMenu" aria-label="Open menu">☰</button>
+      </div>
+    </header>
+
+    <main>
+      <!-- LANDING -->
+      <section class="view is-visible" id="view-home" data-page="home">
+        <div class="hero-wrap">
+          <div class="hero-stickers"><span class="sticker sticker-yellow">A BETTER WAY TO GET THERE</span><span class="sticker sticker-blue">LOCAL / EVERYWHERE</span></div>
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <p class="eyebrow">THE SHARED JOURNEY CLUB</p>
+              <h1>Good roads<br>are <em>better shared.</em></h1>
+              <p class="hero-lede">Less empty seats. More good company. Find a ride going your way, or bring a few people along for yours.</p>
+              <div class="hero-actions">
+                <button class="button button-dark" data-view="find">FIND YOUR NEXT RIDE <span>↗</span></button>
+                <button class="button button-outline" data-view="offer">OFFER A SEAT <span>↗</span></button>
+              </div>
+              <div class="hero-footnote"><span class="tiny-dot"></span> BUILT FOR EVERYDAY JOURNEYS, NOT JUST ROAD TRIPS.</div>
+            </div>
+            <div class="hero-visual">
+              <div class="pink-note">NEW ROUTES<br><b>GOOD STORIES</b> ↗</div>
+              <img src="{{ url_for('static', filename='images/road-car.jpg') }}" alt="White car on an open road at golden hour" class="hero-car">
+              <div class="photo-caption"><span>01 / THE OPEN ROAD</span><span>SHARE THE DRIVE.</span></div>
+              <div class="mint-stamp">IN GOOD<br>COMPANY</div>
+            </div>
+          </div>
+          <div class="hero-bottom-rule"></div>
+        </div>
+        <section class="intro-section section-pad">
+          <div class="section-kicker">A SMALL IDEA. A BETTER EVERYDAY.</div>
+          <div class="intro-grid"><h2>There's room<br>for <span>one more.</span></h2><div class="intro-body"><p>Heading to campus, commuting across town or finally taking that weekend drive? Wayvo connects people going in the same direction.</p><button class="text-link" data-view="auth">COME ON IN <span>↗</span></button></div></div>
+        </section>
+        <section class="feature-strip">
+          <article class="feature-tile feature-photo"><img src="{{ url_for('static', filename='images/city-car.jpg') }}" alt="Blue car ready for a city journey"><div class="photo-overlay"><span>THE EVERYDAY COMMUTE</span><strong>Same way.<br>Shared ride.</strong></div></article>
+          <article class="feature-tile feature-yellow"><span class="tile-number">01 / FIND</span><div class="tile-icon">↗</div><h3>Get there<br>together.</h3><p>Search routes, compare departure times, and ask for the seat that fits your day.</p><button class="text-link" data-view="find">EXPLORE RIDES <span>↗</span></button></article>
+          <article class="feature-tile feature-blue"><span class="tile-number">02 / OFFER</span><div class="tile-icon">＋</div><h3>Your car.<br>Extra seats.</h3><p>Share your route, split the cost, and make the most of the seats going spare.</p><button class="text-link" data-view="offer">POST A RIDE <span>↗</span></button></article>
+        </section>
+        <section class="quote-band"><span class="quote-mark">“</span><p>The best part of the journey<br>might be who you meet on it.</p><span class="quote-sign">Wayvo / FIELD NOTE NO. 01</span></section>
+      </section>
+
+      <!-- AUTH -->
+      <section class="view" id="view-auth" data-page="auth">
+        <div class="auth-layout">
+          <div class="auth-left">
+            <button class="back-link" data-view="home">← BACK TO INDEX</button>
+            <div class="auth-heading"><p class="eyebrow">YOUR NEXT JOURNEY STARTS HERE</p><h1>Come on<br><em>in.</em></h1><p>A seat for every direction.</p></div>
+            <div class="auth-card">
+              <div class="auth-tabs"><button class="auth-tab is-active" data-auth-tab="login">LOG IN</button><button class="auth-tab" data-auth-tab="signup">CREATE ACCOUNT</button></div>
+              <form id="authForm">
+                <div class="form-field hidden" id="nameField"><label for="authName">YOUR NAME</label><input id="authName" name="name" type="text" placeholder="What should we call you?" autocomplete="name"></div>
+                <div class="form-field"><label for="authEmail">EMAIL ADDRESS</label><input id="authEmail" name="email" type="email" placeholder="you@example.com" required autocomplete="email"></div>
+                <div class="form-field"><label for="authPassword">PASSWORD</label><input id="authPassword" name="password" type="password" placeholder="At least 6 characters" minlength="6" required autocomplete="current-password"></div>
+                <div class="auth-extra"><label class="check-row"><input type="checkbox" id="rememberMe" checked> <span>Keep me signed in on this device</span></label><span class="small-note">SECURE SESSION</span></div>
+                <button class="button button-dark button-wide" id="authSubmit" type="submit">LOG IN TO Wayvo <span>↗</span></button>
+                <p class="form-note" id="authNote">Create an account to save rides and booking requests to the shared database.</p>
+              </form>
+            </div>
+          </div>
+          <aside class="auth-art"><img src="{{ url_for('static', filename='images/road-car.jpg') }}" alt="A car on a sunlit country road"><div class="art-label art-label-top">Wayvo<br>FIELD NOTES / 001</div><div class="art-bottom"><span>GO A LITTLE FURTHER.</span><h2>There's a place<br>for you here.</h2></div><div class="art-circle">GO<br>TOGETHER</div></aside>
+        </div>
+      </section>
+
+      <!-- DASHBOARD -->
+      <section class="view" id="view-dashboard" data-page="dashboard">
+        <div class="app-page-head"><div><p class="eyebrow">MONDAY MOTION / YOUR DASHBOARD</p><h1>Let's get you <em>moving.</em></h1><p class="subhead">Good morning, <span id="welcomeName">Rider</span>. Where are we going?</p></div><span class="sticker sticker-yellow">YOUR NEXT CHAPTER ↗</span></div>
+        <div class="dashboard-actions">
+          <button class="action-card find-action" data-view="find"><span class="action-label">01 / FIND A RIDE</span><img src="{{ url_for('static', filename='images/city-car.jpg') }}" alt="Blue car" class="action-car"><span class="action-circle">↗</span><h2>Find your<br>way there.</h2><p>Search seats heading in your direction.</p><span class="action-bottom">BROWSE THE BOARD ↗</span></button>
+          <button class="action-card offer-action" data-view="offer"><span class="action-label">02 / OFFER A RIDE</span><div class="route-doodle" aria-hidden="true"><span></span><i>✳</i><b>+</b></div><span class="action-circle">＋</span><h2>Got room<br>for one more?</h2><p>Post your route and share the journey.</p><span class="action-bottom">POST YOUR ROUTE ↗</span></button>
+        </div>
+        <div class="dashboard-lower"><section class="upcoming-panel"><div class="panel-heading"><div><p class="eyebrow">ON YOUR RADAR</p><h2>Next departures</h2></div><button class="text-link" data-view="find">SEE ALL <span>↗</span></button></div><div id="dashboardRides" class="mini-rides"></div></section><aside class="side-note"><span class="note-doodle">✳</span><p class="eyebrow">A LITTLE REMINDER</p><h3>Good trips<br>start with<br><em>good people.</em></h3><button class="text-link" data-view="safety">TRAVEL THOUGHTFULLY <span>↗</span></button></aside></div>
+      </section>
+
+      <!-- FIND RIDES -->
+      <section class="view" id="view-find" data-page="find">
+        <div class="app-page-head find-head"><div><p class="eyebrow">THE RIDE BOARD / FIND YOUR WAY</p><h1>Going <em>your way?</em></h1><p class="subhead">A good seat might already be heading where you need to go.</p></div><img class="head-car" src="{{ url_for('static', filename='images/city-car.jpg') }}" alt="Blue car for a city trip"></div>
+        <form id="searchForm" class="search-panel"><div class="form-field"><label for="searchFrom">FROM</label><input id="searchFrom" placeholder="e.g. Hyderabad"></div><span class="swap-icon">↔</span><div class="form-field"><label for="searchTo">TO</label><input id="searchTo" placeholder="e.g. Vijayawada"></div><div class="form-field"><label for="searchDate">DATE</label><input id="searchDate" type="date"></div><button class="button button-dark" type="submit">SEARCH RIDES <span>⌕</span></button></form>
+        <div class="results-heading"><div><p class="eyebrow">OPEN SEATS, OPEN ROADS</p><h2 id="resultsTitle">Rides worth a look <span class="result-count" id="resultCount">0</span></h2></div><select id="sortRides" aria-label="Sort rides"><option value="soon">Soonest first</option><option value="price">Lowest price</option><option value="seats">Most seats</option></select></div>
+        <div id="rideResults" class="ride-grid"></div><div id="noResults" class="empty-state hidden"><span>⌕</span><h3>No rides on that route yet.</h3><p>Try another place, or check back after someone posts a ride.</p><button class="button button-outline" data-view="offer">OFFER THIS ROUTE ↗</button></div>
+      </section>
+
+      <!-- OFFER RIDE -->
+      <section class="view" id="view-offer" data-page="offer">
+        <div class="app-page-head offer-head"><div><p class="eyebrow">PUT YOUR ROUTE ON THE MAP</p><h1>Share the <em>drive.</em></h1><p class="subhead">Already going? A few extra seats can make the journey better for everyone.</p></div><div class="offer-sticker">YOUR CAR.<br>MORE STORIES.<br><span>↗</span></div></div>
+        <form id="offerForm" class="offer-form">
+          <div class="form-section-title"><span>01</span><div><h2>The route</h2><p>Where are you starting and where are you headed?</p></div></div>
+          <div class="form-grid two"><div class="form-field"><label for="offerFrom">STARTING CITY / AREA *</label><input id="offerFrom" required placeholder="e.g. Rajahmundry"></div><div class="form-field"><label for="offerTo">DESTINATION *</label><input id="offerTo" required placeholder="e.g. Visakhapatnam"></div><div class="form-field"><label for="offerPickup">EXACT PICKUP POINT *</label><input id="offerPickup" required placeholder="e.g. Main entrance, RTC Complex"></div><div class="form-field"><label for="offerDrop">DROP-OFF POINT</label><input id="offerDrop" placeholder="e.g. Railway station"></div></div>
+          <div class="form-section-title form-section-spaced"><span>02</span><div><h2>Timing & seats</h2><p>A clear plan makes for an easier trip.</p></div></div>
+          <div class="form-grid four"><div class="form-field"><label for="offerDate">DEPARTURE DATE *</label><input id="offerDate" type="date" required></div><div class="form-field"><label for="offerTime">DEPARTURE TIME *</label><input id="offerTime" type="time" required></div><div class="form-field"><label for="offerSeats">OPEN SEATS *</label><select id="offerSeats" required><option value="1">1 seat</option><option value="2" selected>2 seats</option><option value="3">3 seats</option><option value="4">4 seats</option></select></div><div class="form-field"><label for="offerPrice">COST / SEAT (₹) *</label><input id="offerPrice" type="number" min="0" max="50000" value="250" required></div></div>
+          <div class="form-section-title form-section-spaced"><span>03</span><div><h2>Your car</h2><p>Vehicle details are shown to a passenger after you accept their request.</p></div></div>
+          <div class="form-grid two"><div class="form-field"><label for="offerCar">CAR MODEL *</label><input id="offerCar" required placeholder="e.g. Maruti Suzuki Swift"></div><div class="form-field"><label for="offerColor">CAR COLOUR</label><input id="offerColor" placeholder="e.g. Pearl white"></div><div class="form-field"><label for="offerReg">REGISTRATION NUMBER *</label><input id="offerReg" required placeholder="e.g. AP 05 AB 1234"></div><div class="form-field"><label for="offerPhone">MOBILE NUMBER *</label><input id="offerPhone" type="tel" inputmode="tel" autocomplete="tel" maxlength="16" pattern="(?:\+91[- ]?)?[6-9][0-9]{9}" required placeholder="e.g. 9876543210" aria-describedby="offerPhoneHint"><small id="offerPhoneHint" class="field-hint">Shared with passengers only after you accept their booking.</small></div></div>
+          <div class="form-field notes-field"><label for="offerNotes">A NOTE FOR PASSENGERS (OPTIONAL)</label><textarea id="offerNotes" rows="3" placeholder="Luggage space, preferred stops, anything useful..."></textarea></div>
+          <div class="form-submit-row"><p><span class="tiny-dot"></span> ONLY POST A RIDE YOU'RE COMFORTABLE SHARING.</p><button class="button button-dark" type="submit">PUBLISH MY RIDE <span>↗</span></button></div>
+        </form>
+      </section>
+
+      <!-- ACTIVITY -->
+      <section class="view" id="view-activity" data-page="activity">
+        <div class="app-page-head"><div><p class="eyebrow">YOUR TRAVEL LOG / ACTIVITY</p><h1>Every trip has a <em>story.</em></h1><p class="subhead">Keep track of your seat requests and the rides you're sharing.</p></div><span class="sticker sticker-blue">YOUR ROAD, YOUR PACE</span></div>
+        <div class="activity-tabs"><button class="activity-tab is-active" data-activity-tab="requests">MY REQUESTS <span id="requestTabCount">0</span></button><button class="activity-tab" data-activity-tab="offered">RIDES I'M OFFERING <span id="offeredTabCount">0</span></button></div>
+        <div id="activityList" class="activity-list"></div>
+      </section>
+
+      <!-- SAFETY -->
+      <section class="view" id="view-safety" data-page="safety">
+        <div class="app-page-head"><div><p class="eyebrow">FIELD NOTES / TRAVEL THOUGHTFULLY</p><h1>Good journeys<br>begin with <em>care.</em></h1><p class="subhead">A few simple habits help make shared rides feel better for everyone.</p></div><div class="safety-icon">✳</div></div>
+        <div class="safety-grid"><article><span>01 / BEFORE</span><div class="safety-symbol">⌖</div><h2>Know the plan.</h2><p>Confirm your pickup point, drop-off, departure time and cost before setting off.</p></article><article><span>02 / PEOPLE</span><div class="safety-symbol">◎</div><h2>Trust, but verify.</h2><p>Check who you are travelling with. Share trip details with someone you trust.</p></article><article><span>03 / ON THE ROAD</span><div class="safety-symbol">↗</div><h2>Keep it respectful.</h2><p>Agree on luggage, stops, music and seat arrangements. A little communication goes a long way.</p></article><article><span>04 / REMEMBER</span><div class="safety-symbol">✳</div><h2>Your call matters.</h2><p>If a journey doesn't feel right, don't get in. Prioritise your comfort and safety.</p></article></div>
+        <div class="demo-disclaimer"><strong>A note on shared rides</strong><p>Confirm the vehicle, pickup point, departure time and cost before travelling. Wayvo is a student project; arrange rides thoughtfully and prioritise your safety.</p></div>
+      </section>
+    </main>
+
+    <footer class="site-footer"><div class="footer-brand"><span class="brand-mark">WV</span><span><strong>Wayvo</strong><small>GOOD ROADS ARE BETTER SHARED.</small></span></div><span class="footer-center">DESIGNED FOR THE WAY WE GET THERE.</span><span class="footer-right">FLASK + MYSQL / LOCAL APP</span></footer>
+  </div>
+  <div id="bookingModal" class="booking-modal hidden" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <form id="bookingForm" class="booking-dialog">
+      <button class="booking-close" type="button" id="bookingClose" aria-label="Close">×</button>
+      <p class="eyebrow">MAKE IT A SHARED JOURNEY</p>
+      <h2 id="bookingModalTitle">How many seats?</h2>
+      <p class="booking-route" id="bookingRoute"></p>
+      <div class="form-field"><label for="bookingSeats">NUMBER OF SEATS</label><select id="bookingSeats" required></select></div>
+      <p class="booking-price" id="bookingPrice"></p>
+      <div class="booking-actions"><button type="button" class="button button-outline" id="bookingCancel">CANCEL</button><button type="submit" class="button button-dark" id="bookingConfirm">REQUEST SEATS ↗</button></div>
+    </form>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>
